@@ -1,0 +1,15 @@
+{
+  "name": "http-diff",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/habovh/http-diff.git"
+  },
+  "author": "Jordan Becker",
+  "bugs": {
+    "url": "https://github.com/habovh/http-diff/issues"
+  },
+  "homepage": "https://github.com/habovh/http-diff#readme"
+}
