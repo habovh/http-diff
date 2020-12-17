@@ -26,6 +26,10 @@ const main = async () => {
     return
   }
 
+  if (fs.existsSync('./lock')) return
+
+  fs.writeFileSync('./lock', '')
+
   const browserConfig = {
     capabilities: {
       browserName: config.browser?.name || 'chrome',
@@ -94,6 +98,7 @@ const main = async () => {
   }
 
   await browser.deleteSession()
+  fs.unlinkSync('./lock')
 }
 
 main()
