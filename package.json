@@ -11,5 +11,10 @@
   "bugs": {
     "url": "https://github.com/habovh/http-diff/issues"
   },
-  "homepage": "https://github.com/habovh/http-diff#readme"
+  "type": "module",
+  "homepage": "https://github.com/habovh/http-diff#readme",
+  "dependencies": {
+    "diff": "^5.0.0",
+    "webdriverio": "^6.10.10"
+  }
 }
