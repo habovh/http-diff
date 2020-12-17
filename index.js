@@ -62,9 +62,11 @@ const main = async () => {
       break
     }
 
+    const selector = watchEntry.selector || 'body'
+
     await browser.navigateTo(watchEntry.url)
 
-    const node = await browser.$(watchEntry.selector || 'body')
+    const node = await browser.$(selector)
 
     await node.waitForExist({ timeout: 10000 })
 
@@ -77,7 +79,7 @@ const main = async () => {
     }
 
     // Compare
-    const oldHtml = state[watchEntry.url]
+    const oldHtml = state[watchEntry.url + selector]
     if (oldHtml) {
       const diff = diffLines(html, oldHtml, { ignoreWhitespace: true })
       const changes = diff.filter((change) => change.added || change.removed)
@@ -87,7 +89,7 @@ const main = async () => {
     }
 
     // Store
-    state[watchEntry.url] = html
+    state[watchEntry.url + selector] = html
     fs.writeFileSync('./state.json', JSON.stringify(state))
   }
 
