@@ -44,6 +44,7 @@ type Config = {
       name?: string,
       url: string,
       selector?: string,
+      json?: boolean,
       webhook?: {
         method: 'POST' | 'GET',
         url: string,

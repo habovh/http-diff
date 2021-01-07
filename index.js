@@ -4,7 +4,7 @@ import fs from 'fs'
 
 import notifier from './notifier.js'
 
-const main = async () => {
+const check = async () => {
   if (!fs.existsSync('./config.json')) {
     console.warn('No configuration file found, exiting.')
     return
@@ -85,7 +85,10 @@ const main = async () => {
     // Compare
     const oldHtml = state[watchEntry.url + selector]
     if (oldHtml) {
-      const diff = diffLines(html, oldHtml, { ignoreWhitespace: true })
+      const diff = diffLines(
+        watchEntry.json ? JSON.stringify(html, null, 2) : html,
+        watchEntry.json ? JSON.stringify(oldHtml, null, 2) : oldHtml,
+        { ignoreWhitespace: true })
       const changes = diff.filter((change) => change.added || change.removed)
       if (changes.length > 0) {
         await notifier(watchEntry, changes)
@@ -101,4 +104,4 @@ const main = async () => {
   fs.unlinkSync('./lock')
 }
 
-main()
+export default check
