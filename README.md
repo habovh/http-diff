@@ -26,6 +26,12 @@ You can run the script manually, but it was intended to be used as part of a cro
 $ node index.js
 ```
 
+As an accomodation, you can also use the `watch.js` script, which perform checks once every 60 seconds.
+
+```terminal
+$ node watch.js
+```
+
 ## Configuration
 
 Configuration takes place in a `config.json` file in the root folder.
