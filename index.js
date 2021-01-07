@@ -75,6 +75,8 @@ const check = async () => {
     await node.waitForExist({ timeout: 10000 })
 
     const html = await node.getHTML()
+    const text = await node.getText()
+    const json = JSON.parse(text)
 
     let state = {}
 
@@ -86,8 +88,8 @@ const check = async () => {
     const oldHtml = state[watchEntry.url + selector]
     if (oldHtml) {
       const diff = diffLines(
-        watchEntry.json ? JSON.stringify(html, null, 2) : html,
-        watchEntry.json ? JSON.stringify(oldHtml, null, 2) : oldHtml,
+        oldHtml,
+        watchEntry.json ? JSON.stringify(json, null, 2) : html,
         { ignoreWhitespace: true })
       const changes = diff.filter((change) => change.added || change.removed)
       if (changes.length > 0) {
@@ -96,7 +98,7 @@ const check = async () => {
     }
 
     // Store
-    state[watchEntry.url + selector] = html
+    state[watchEntry.url + selector] = watchEntry.json ? JSON.stringify(json, null, 2) : html
     fs.writeFileSync('./state.json', JSON.stringify(state))
   }
 
